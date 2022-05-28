@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        label 'build_npm'
+    }
+
+    tools {
+        nodejs 'node'
+    }
+
+    stage('git'){
+        steps {
+            git branch: 'main', credentialsId: '04ea13ae-ce7c-4bc6-b5f0-c222ad85c12d', url: 'https://github.com/nrajulearning/js-e2e-express-server.git'
+        }
+    }
+
+    stage('build'){
+        steps {
+           sh npm install
+           sh npm run build
+           sh npm pack
+        }
+    }
+
+    stage ('publish'){
+        steps {
+            sh npm publish
+        }
+    }
+
+}
