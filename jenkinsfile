@@ -3,10 +3,6 @@ pipeline {
         label 'build_npm'
     }
 
-    tools {
-        nodejs 'nodejs-18'
-    }
-
     stages {
         stage('git'){
            steps {
